@@ -1,18 +1,17 @@
-#[macro_use] extern crate serde_derive;
 
 extern crate rustc_serialize;
 extern crate openssl;
 extern crate dotenv;
 extern crate serde;
 extern crate serde_json;
+extern crate example_application;
 
-use super::oauth::crypto::{self};
-use rustc_serialize::base64::{self, ToBase64};
 use std::path::Path;
 use dotenv::dotenv;
 use std::fs::File;
 use std::io::Write;
 use std::env;
+use example_application::oauth::crypto::{self, Encodable};
 
 // Using a path from the config generates JWKs
 fn main() {
@@ -33,7 +32,7 @@ fn main() {
     if secret_key_path.exists() {
         println!("A secret key has already been generated for this service.")
     } else {
-        let (secret_key, public_key) = crypto::generate_keypair();
+        let (secret_key, public_key) = crypto::generate_keypair().unwrap();
 
         let secret_key_json = secret_key.encode().unwrap();
         let public_key_json = public_key.encode().unwrap();

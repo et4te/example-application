@@ -11,9 +11,6 @@ extern crate serde_json;
 extern crate rustc_serialize;
 extern crate handlebars;
 extern crate reqwest;
-extern crate futures;
-extern crate hyper;
-extern crate tokio_core;
 extern crate dotenv;
 extern crate rand;
 

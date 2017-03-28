@@ -22,7 +22,7 @@ pub struct SecretKey {
     pub qi: String,
 }
 
-trait Encodable where Self: serde::Serialize {
+pub trait Encodable where Self: serde::Serialize {
     fn encode(&self) -> Result<String, OAuthError> {
         let encoded = try!(serde_json::to_string(self));
         Ok(encoded)
